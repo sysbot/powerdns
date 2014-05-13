@@ -9,79 +9,79 @@ package 'ragel'
 
 package 'libpq-dev'
 
-git '/usr/src/pdns' do
-  repository 'https://github.com/PowerDNS/pdns.git'
-  reference node[:pdns][:source][:reference]
+git '/usr/src/powerdns' do
+  repository 'https://github.com/PowerDNS/powerdns.git'
+  reference node[:powerdns][:source][:reference]
   action :sync
 end
 
-path = '/usr/src/pdns'
+path = '/usr/src/powerdns'
 
-user 'pdns'
-group 'pdns'
+user 'powerdns'
+group 'powerdns'
 
-execute 'pdns: bootstrap' do
+execute 'powerdns: bootstrap' do
   command './bootstrap'
   cwd path
-  creates '/usr/src/pdns/configure'
+  creates '/usr/src/powerdns/configure'
 end
 
-execute 'pdns: configure' do
+execute 'powerdns: configure' do
   command './configure ' +
-    "--with-modules='#{node[:pdns][:source][:backends]}' " +
+    "--with-modules='#{node[:powerdns][:source][:backends]}' " +
     '--with-mysql-includes=/usr/include ' +
     '--without-lua'
   cwd path
-  creates '/usr/src/pdns/config.h'
+  creates '/usr/src/powerdns/config.h'
 end
 
-execute 'pdns: build' do
+execute 'powerdns: build' do
   command 'make'
   cwd path
-  creates '/usr/src/pdns/pdns/pdns_server'
+  creates '/usr/src/powerdns/powerdns/powerdns_server'
 end
 
-execute 'pdns: install' do
+execute 'powerdns: install' do
   command 'make install'
   cwd path
-  creates '/usr/local/sbin/pdns_server'
+  creates '/usr/local/sbin/powerdns_server'
 end
 
-file '/usr/src/pdns/pdns/pdns' do
+file '/usr/src/powerdns/powerdns/powerdns' do
   owner 'root'
   group 'root'
   mode '0755'
 end
 
-execute 'copy pdns init' do
-  command 'cp /usr/src/pdns/pdns/pdns /etc/init.d/pdns'
-  not_if 'diff /usr/src/pdns/pdns/pdns /etc/init.d/pdns'
+execute 'copy powerdns init' do
+  command 'cp /usr/src/powerdns/powerdns/powerdns /etc/init.d/powerdns'
+  not_if 'diff /usr/src/powerdns/powerdns/powerdns /etc/init.d/powerdns'
 end
 
-file '/etc/init.d/pdns' do
+file '/etc/init.d/powerdns' do
   owner 'root'
   group 'root'
   mode '0755'
 end
 
 directory '/etc/powerdns' do
-  owner 'pdns'
-  group 'pdns'
+  owner 'powerdns'
+  group 'powerdns'
   mode '0755'
 end
 
-link '/usr/local/etc/pdns.conf' do
-  to '/etc/powerdns/pdns.conf'
+link '/usr/local/etc/powerdns.conf' do
+  to '/etc/powerdns/powerdns.conf'
 end
 
-template '/etc/powerdns/pdns.conf' do
-  source 'pdns.conf.erb'
-  owner 'pdns'
-  group 'pdns'
+template '/etc/powerdns/powerdns.conf' do
+  source 'powerdns.conf.erb'
+  owner 'powerdns'
+  group 'powerdns'
   mode '0644'
-  notifies :restart, 'service[pdns]', :immediately
+  notifies :restart, 'service[powerdns]', :immediately
 end
 
-service 'pdns' do
+service 'powerdns' do
   action [ :enable, :start ]
 end

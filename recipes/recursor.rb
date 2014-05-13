@@ -1,5 +1,5 @@
 #
-# Cookbook Name:: pdns
+# Cookbook Name:: powerdns
 # Recipe:: default
 #
 # Copyright 2010, Opscode, Inc.
@@ -17,15 +17,15 @@
 # limitations under the License.
 #
 
-package "pdns-recursor"
+package "powerdns-recursor"
 
-service "pdns-recursor" do
+service "powerdns-recursor" do
   action [:enable, :start]
 end
 
 case node["platform"]
 when "arch"
-  user "pdns" do
+  user "powerdns" do
     shell "/bin/false"
     home "/var/spool/powerdns"
     supports :manage_home => true
@@ -33,10 +33,10 @@ when "arch"
   end
 end
 
-template "#{node['pdns']['recursor']['config_dir']}/recursor.conf" do
+template "#{node['powerdns']['recursor']['config_dir']}/recursor.conf" do
   source "recursor.conf.erb"
   owner "root"
   group "root"
   mode 0644
-  notifies :restart, "service[pdns-recursor]", :immediately
+  notifies :restart, "service[powerdns-recursor]", :immediately
 end

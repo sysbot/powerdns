@@ -3,10 +3,10 @@
 #################################################
 #
 # aaaa-additional-processing=off
-allow-from=<%= node["pdns"]["recursor"]["allow_from"].join(", ") %>
+allow-from=<%= node["powerdns"]["recursor"]["allow_from"].join(", ") %>
 # allow-from-file=
 # auth-can-lower-ttl=off
-auth-zones=<%= node["pdns"]["recursor"]["auth_zones"].join(", ") %>
+auth-zones=<%= node["powerdns"]["recursor"]["auth_zones"].join(", ") %>
 # chroot=
 # client-tcp-timeout=2
 # config-dir=/etc/powerdns/
@@ -19,13 +19,13 @@ auth-zones=<%= node["pdns"]["recursor"]["auth_zones"].join(", ") %>
 # entropy-source=/dev/urandom
 # etc-hosts-file=/etc/hosts
 # export-etc-hosts=off
-forward-zones=<%= node["pdns"]["recursor"]["forward_zones"].join(", ") %>
+forward-zones=<%= node["powerdns"]["recursor"]["forward_zones"].join(", ") %>
 # forward-zones-file=
-forward-zones-recurse=<%= node["pdns"]["recursor"]["forward_zones_recurse"].join(", ") %>
+forward-zones-recurse=<%= node["powerdns"]["recursor"]["forward_zones_recurse"].join(", ") %>
 # hint-file=
 # ignore-rd-bit=off
-local-address=<%= node["pdns"]["recursor"]["local_address"].join(", ") %>
-local-port=<%= node["pdns"]["recursor"]["local_port"] %>
+local-address=<%= node["powerdns"]["recursor"]["local_address"].join(", ") %>
+local-port=<%= node["powerdns"]["recursor"]["local_port"] %>
 # log-common-errors=yes
 # logging-facility=
 # lua-dns-script=
@@ -46,8 +46,8 @@ quiet=yes
 # remotes-ringbuffer-entries=0
 # serve-rfc1918=
 # server-id=
-setgid=<%= node["pdns"]["group"] %>
-setuid=<%= node["pdns"]["user"] %>
+setgid=<%= node["powerdns"]["group"] %>
+setuid=<%= node["powerdns"]["user"] %>
 # single-socket=off
 # soa-minimum-ttl=0
 # soa-serial-offset=0
@@ -59,4 +59,4 @@ setuid=<%= node["pdns"]["user"] %>
 # stack-size=200000
 # threads=2
 # trace=off
-# version-string=PowerDNS Recursor 3.2 $Id: pdns_recursor.cc 1538 2010-03-06 11:39:03Z ahu $
+# version-string=PowerDNS Recursor 3.2 $Id: powerdns_recursor.cc 1538 2010-03-06 11:39:03Z ahu $

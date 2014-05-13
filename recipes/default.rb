@@ -1,5 +1,5 @@
 #
-# Cookbook Name:: pdns
+# Cookbook Name:: powerdns
 # Recipe:: default
 #
 # Copyright 2010, Opscode, Inc.
@@ -17,4 +17,4 @@
 # limitations under the License.
 #
 
-include_recipe "pdns::recursor"
+include_recipe "powerdns::recursor"

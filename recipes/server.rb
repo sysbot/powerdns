@@ -1,5 +1,5 @@
 #
-# Cookbook Name:: pdns
+# Cookbook Name:: powerdns
 # Recipe:: server
 #
 # Copyright 2010, Opscode, Inc.
@@ -17,22 +17,22 @@
 # limitations under the License.
 #
 
-include_recipe "pdns::#{node['pdns']['server_backend']}"
+include_recipe "powerdns::#{node['powerdns']['server_backend']}"
 
-package "pdns" do
+package "powerdns" do
   package_name value_for_platform(
-    ["debian","ubuntu"] => { "default" => "pdns-server" },
-    "default" => "pdns"
+    ["debian","ubuntu"] => { "default" => "powerdns-server" },
+    "default" => "powerdns"
   )
 end
 
-service "pdns" do
+service "powerdns" do
   action [:enable, :start]
 end
 
 case node["platform"]
 when "arch"
-  user "pdns" do
+  user "powerdns" do
     shell "/bin/false"
     home "/var/spool/powerdns"
     supports :manage_home => true
@@ -40,12 +40,12 @@ when "arch"
   end
 end
 
-template "/etc/powerdns/pdns.conf" do
-  source "pdns.conf.erb"
+template "/etc/powerdns/powerdns.conf" do
+  source "powerdns.conf.erb"
   owner "root"
   group "root"
   mode 0644
-  notifies :restart, "service[pdns]", :immediately
+  notifies :restart, "service[powerdns]", :immediately
 end
 
 resolvconf "custom" do

@@ -8,7 +8,7 @@ action :create do
     Chef::Log.info "#{ @new_resource } already exists - nothing to do."
   else
     converge_by("Create #{ @new_resource }") do
-      create_pdns_record
+      create_powerdns_record
     end
   end
 end
@@ -44,7 +44,7 @@ end
 def dns_record_exists?(domain,name,type)
   require 'sqlite3'
   rows=nil
-  SQLite3::Database.new("/var/lib/pdns/pdns.sqlite3") do |db|
+  SQLite3::Database.new("/var/lib/powerdns/powerdns.sqlite3") do |db|
     domain_id = lookup_domain(db,@new_resource.domain)
     if domain_id.nil?
       Chef::Log.info "domain: #{@new_resource.domain} is missing"
@@ -58,9 +58,9 @@ def dns_record_exists?(domain,name,type)
   !(rows.empty?)
 end
 
-def create_pdns_record
+def create_powerdns_record
   require 'sqlite3'
-  SQLite3::Database.new("/var/lib/pdns/pdns.sqlite3") do |db|
+  SQLite3::Database.new("/var/lib/powerdns/powerdns.sqlite3") do |db|
     domain_id = lookup_domain(db,@new_resource.domain)
     if domain_id.nil?
       Chef::Log.info "domain: #{@new_resource.domain} is missing"

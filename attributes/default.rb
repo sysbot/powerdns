@@ -1,5 +1,5 @@
 #
-# Cookbook Name:: pdns
+# Cookbook Name:: powerdns
 # Attributes:: default
 #
 # Copyright 2010, Opscode, Inc.
@@ -17,23 +17,23 @@
 # limitations under the License.
 #
 
-default["pdns"]["user"] = "pdns"
-default["pdns"]["group"] = "pdns"
+default["powerdns"]["user"] = "powerdns"
+default["powerdns"]["group"] = "powerdns"
 
 case node['platform_family']
 when "rhel","fedora"
-  default["pdns"]["server"]["config_dir"] = "/etc/pdns"
-  default["pdns"]["recursor"]["config_dir"] = "/etc/pdns-recursor"
-  default["pdns"]["user"] = "pdns-recursor"
-  default["pdns"]["group"] = "pdns-recursor"
+  default["powerdns"]["server"]["config_dir"] = "/etc/powerdns"
+  default["powerdns"]["recursor"]["config_dir"] = "/etc/powerdns-recursor"
+  default["powerdns"]["user"] = "powerdns-recursor"
+  default["powerdns"]["group"] = "powerdns-recursor"
 else
-  default["pdns"]["server"]["config_dir"] = "/etc/powerdns"
-  default["pdns"]["recursor"]["config_dir"] = "/etc/powerdns"
+  default["powerdns"]["server"]["config_dir"] = "/etc/powerdns"
+  default["powerdns"]["recursor"]["config_dir"] = "/etc/powerdns"
 end
 
-default["pdns"]["server_backend"] = "mariadb"
+default["powerdns"]["server_backend"] = "mariadb"
 
-default["pdns"]["recursor"]["allow_from"] = [
+default["powerdns"]["recursor"]["allow_from"] = [
   "127.0.0.0/8",
   "10.0.0.0/8",
   "192.168.0.0/16",
@@ -42,8 +42,8 @@ default["pdns"]["recursor"]["allow_from"] = [
   "e80::/10"
 ]
 
-default["pdns"]["recursor"]["auth_zones"] = []
-default["pdns"]["recursor"]["forward_zones"] = []
-default["pdns"]["recursor"]["forward_zones_recurse"] = []
-default["pdns"]["recursor"]["local_address"] = [ipaddress]
-default["pdns"]["recursor"]["local_port"] = "53"
+default["powerdns"]["recursor"]["auth_zones"] = []
+default["powerdns"]["recursor"]["forward_zones"] = []
+default["powerdns"]["recursor"]["forward_zones_recurse"] = []
+default["powerdns"]["recursor"]["local_address"] = [ipaddress]
+default["powerdns"]["recursor"]["local_port"] = "53"

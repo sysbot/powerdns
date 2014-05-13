@@ -1,5 +1,5 @@
 #
-# Cookbook Name:: pdns
+# Cookbook Name:: powerdns
 # Recipe:: sqlite3
 #
 # Copyright 2010, Opscode, Inc.
@@ -25,26 +25,26 @@ end.run_action(:install)
 
 chef_gem 'sqlite3'
 
-package "pdns-backend-sqlite3" do
+package "powerdns-backend-sqlite3" do
   package_name value_for_platform(
-    "arch" => { "default" => "pdns" },
-    ["debian","ubuntu"] => { "default" => "pdns-backend-sqlite3" },
-    ["redhat","centos","fedora"] => { "default" => "pdns-backend-sqlite3" },
-    "default" => "pdns-backend-sqlite3"
+    "arch" => { "default" => "powerdns" },
+    ["debian","ubuntu"] => { "default" => "powerdns-backend-sqlite3" },
+    ["redhat","centos","fedora"] => { "default" => "powerdns-backend-sqlite3" },
+    "default" => "powerdns-backend-sqlite3"
   )
 end
 
-directory "/var/lib/pdns"
+directory "/var/lib/powerdns"
 
-cookbook_file "/var/tmp/pdns_schema.sql" do
+cookbook_file "/var/tmp/powerdns_schema.sql" do
   source "schema.sql"
 end
 
-ruby_block "load pdns schema" do
+ruby_block "load powerdns schema" do
   block do
     require 'sqlite3'
-    SQLite3::Database.new("/var/lib/pdns/pdns.sqlite3") do |db|
-      db.execute_batch(IO.read("/var/tmp/pdns_schema.sql"))
+    SQLite3::Database.new("/var/lib/powerdns/powerdns.sqlite3") do |db|
+      db.execute_batch(IO.read("/var/tmp/powerdns_schema.sql"))
     end
   end
 end

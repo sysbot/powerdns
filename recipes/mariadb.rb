@@ -1,5 +1,5 @@
 #
-# Cookbook Name:: pdns
+# Cookbook Name:: powerdns
 # Recipe:: mariadb
 #
 # Copyright 2014, Ooyala, Inc.
@@ -20,15 +20,15 @@
 include_recipe "mariadb::client"
 include_recipe "mariadb::ruby"
 
-#package "pdns-backend-mysql" do
+#package "powerdns-backend-mysql" do
 #  package_name value_for_platform(
-#    "arch" => { "default" => "pdns" },
-#    ["debian","ubuntu"] => { "default" => "pdns-backend-mysql" },
-#    ["redhat","centos","fedora"] => { "default" => "pdns-backend-mysql" },
-#    "default" => "pdns-backend-mysql"
+#    "arch" => { "default" => "powerdns" },
+#    ["debian","ubuntu"] => { "default" => "powerdns-backend-mysql" },
+#    ["redhat","centos","fedora"] => { "default" => "powerdns-backend-mysql" },
+#    "default" => "powerdns-backend-mysql"
 #  )
 #end
 
-template "/tmp/pdns.schema.sql" do
+template "/tmp/powerdns.schema.sql" do
   source "mariadb.schema.sql"
 end
