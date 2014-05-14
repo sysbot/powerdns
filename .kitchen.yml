@@ -13,6 +13,10 @@ platforms:
   driver:
     box: ubuntu-14.04
     box_url: http://mirrors.ooyala.com/vagrant/ubuntu1404.box
+- name: ubuntu-12.04
+  driver:
+    box: ubuntu-12.04
+    box_url: http://mirrors.ooyala.com/vagrant/ubuntu1204.box
 
 suites:
 - name: default
