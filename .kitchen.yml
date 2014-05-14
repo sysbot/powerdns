@@ -17,5 +17,5 @@ platforms:
 suites:
 - name: default
   run_list:
-    - recipe[pdns::server]
+    - recipe[powerdns::server]
   attributes: {}

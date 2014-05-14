@@ -17,9 +17,9 @@
 # limitations under the License.
 #
 
-package "powerdns-recursor"
+package "pdns-recursor"
 
-service "powerdns-recursor" do
+service "pdns-recursor" do
   action [:enable, :start]
 end
 
@@ -38,5 +38,5 @@ template "#{node['powerdns']['recursor']['config_dir']}/recursor.conf" do
   owner "root"
   group "root"
   mode 0644
-  notifies :restart, "service[powerdns-recursor]", :immediately
+  notifies :restart, "service[pdns-recursor]", :immediately
 end

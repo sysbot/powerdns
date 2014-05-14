@@ -19,14 +19,14 @@
 
 include_recipe "powerdns::#{node['powerdns']['server_backend']}"
 
-package "powerdns" do
+package "pdns" do
   package_name value_for_platform(
-    ["debian","ubuntu"] => { "default" => "powerdns-server" },
-    "default" => "powerdns"
+    ["debian","ubuntu"] => { "default" => "pdns-server" },
+    "default" => "pdns"
   )
 end
 
-service "powerdns" do
+service "pdns" do
   action [:enable, :start]
 end
 
@@ -40,12 +40,12 @@ when "arch"
   end
 end
 
-template "/etc/powerdns/powerdns.conf" do
+template "/etc/powerdns/pdns.conf" do
   source "powerdns.conf.erb"
   owner "root"
   group "root"
   mode 0644
-  notifies :restart, "service[powerdns]", :immediately
+  notifies :restart, "service[pdns]", :immediately
 end
 
 resolvconf "custom" do
