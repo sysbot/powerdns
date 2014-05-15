@@ -17,8 +17,6 @@
 # limitations under the License.
 #
 
-include_recipe "powerdns::#{node['powerdns']['server_backend']}"
-
 package "pdns" do
   package_name value_for_platform(
     ["debian","ubuntu"] => { "default" => "pdns-server" },
