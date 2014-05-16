@@ -17,8 +17,8 @@
 # limitations under the License.
 #
 
-default["powerdns"]["user"] = "powerdns"
-default["powerdns"]["group"] = "powerdns"
+default["powerdns"]["user"] = "pdns"
+default["powerdns"]["group"] = "pdns"
 
 case node['platform_family']
 when "rhel","fedora"
@@ -31,7 +31,7 @@ else
   default["powerdns"]["recursor"]["config_dir"] = "/etc/powerdns"
 end
 
-default["powerdns"]["server_backend"] = "mariadb"
+default["powerdns"]["server_backend"] = "sqlite"
 
 default["powerdns"]["recursor"]["allow_from"] = [
   "127.0.0.0/8",
