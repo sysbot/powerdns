@@ -94,7 +94,10 @@ default["powerdns"]["server"]["soa_refresh_default"] = 10800
 default["powerdns"]["server"]["soa_retry_default"] = 3600
 default["powerdns"]["server"]["soa_serial_offset"] = 0
 default["powerdns"]["server"]["socket_dir"] = '/var/run'
-default["powerdns"]["server"]["strict_rfc_axfrs"] = false
+
+# obsolted parameter
+#default["powerdns"]["server"]["strict_rfc_axfrs"] = false
+#
 default["powerdns"]["server"]["trusted_notification_proxy"] = nil
 default["powerdns"]["server"]["urlredirector"] = '127.0.0.1'
 default["powerdns"]["server"]["version_string"] = 'powerdns'
